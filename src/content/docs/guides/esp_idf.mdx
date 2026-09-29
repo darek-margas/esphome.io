@@ -146,3 +146,20 @@ This environment is then used for:
 - `esptool` invocations, such as when creating `factory.bin` images.
 - `python` execution, using the managed virtual environment interpreter.
 - `cmake` invocations (which drive the underlying `ninja` build system), resolved from either the host environment or ESPHome-managed tools depending on availability.
+
+## Bootloader cache
+
+The ESP-IDF bootloader is its own small CMake project, and every build that does not use signing keys, secure boot or flash encryption produces a byte identical copy of it. ESPHome therefore builds the bootloader once per ESP-IDF version, target, compiler and bootloader configuration, stores it under `<idf_base>/bootloaders/`, and reuses it for every device that shares those. `esphome clean-all` removes the cache together with the toolchains.
+
+The cache is skipped, and the bootloader is built inside the project as before, when any of these apply:
+
+- A signing, secure boot or flash encryption option is enabled.
+- `IDF_PATH` points at your own ESP-IDF checkout.
+- The tools directory is not writable.
+- Any error happens while using the cache; the build logs a warning and falls back for that run.
+
+To turn the cache off entirely:
+
+```bash
+export ESPHOME_BOOTLOADER_CACHE=0
+```
