@@ -127,7 +127,7 @@ api:
 
 - **outgoing_connection** (*Optional*): Have the device open the API connection itself when no dial-back client is
   connected. Requires `encryption`. See
-  [Outgoing Connections](#api-outgoing-connections).
+  [Outgoing Connections](#outgoing-connections).
 
   - **host** (*Optional*, IP address): The address to dial. When not set, the device remembers the address of the last
     client that declared itself a dial-back target (such as Home Assistant) and dials that.
@@ -136,8 +136,6 @@ api:
     in on its own, both after boot and after one disconnects, before the device dials out. Devices with
     [deep sleep](/components/deep_sleep/) skip the wait and dial as soon as the network is up on every wake, since
     the awake window is short. Defaults to `60s`.
-
-<span id="api-outgoing-connections"></span>
 
 ## Outgoing Connections
 
