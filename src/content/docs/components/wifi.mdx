@@ -168,7 +168,8 @@ wifi:
   This helps devices recover from scenarios where they connect to a suboptimal
   AP (e.g., after an AP reboot or site power loss). Automatically disabled if
   `enable_btm` or `enable_rrm` is enabled. See
-  [Post-Connect Roaming](#post-connect-roaming). Defaults to `true`.
+  [Post-Connect Roaming](#post-connect-roaming). Defaults to `true`, except on LN882x, where a scan while
+  connected drops the connection; there it defaults to `false`.
 
 - **on_connect** (*Optional*, [Automation](/automations)): An action to be performed when a connection is established.
 - **on_disconnect** (*Optional*, [Automation](/automations)): An action to be performed when the connection is dropped.
